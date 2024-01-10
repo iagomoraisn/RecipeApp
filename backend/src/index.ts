@@ -10,6 +10,6 @@ app.get("/api/recipes/search", async (req, res) => {
     res.json({message: 'success!'})
 })
 
-app.listen(5000, ()=> {
+app.listen(5001, ()=> {
     console.log("server running on localhost:5000");
 });
