@@ -11,6 +11,13 @@ const searchRecipes = (searchTerm: string, page:number) => {
         apiKey,
         query: searchTerm,
         number: "10",
-        offset: (page * 10)
+        offset: (page * 10).toString()
+    }
+    url.search = new URLSearchParams(queryParams).toString()
+
+    try {
+
+    } catch (error) {
+        
     }
 };
