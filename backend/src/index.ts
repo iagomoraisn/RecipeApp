@@ -11,8 +11,10 @@ app.get("/api/recipes/search", async (req, res) => {
     const searchTerm = req.query.searchTerm as string;
     const page = parseInt(req.query.page as string);
     const results = RecipeAPI.searchRecipes(searchTerm, page);
+
+    return res.json(results);
 })
 
-app.listen(5001, ()=> {
+app.listen(5000, ()=> {
     console.log("server running on localhost:5000");
 });
