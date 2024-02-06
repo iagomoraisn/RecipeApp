@@ -18,12 +18,9 @@ export const searchRecipes = async (searchTerm: string, page: number) => {
 
         try {
             const searchResponse = await fetch(url);
-            if (searchResponse.headers.get('content-type')?.includes('application/json')) {
-                const resultsJson = await searchResponse.json();
-                return resultsJson;
-            } else {
-                console.error('API response was not JSON:', await searchResponse.text());
-            }
+            const resultsJson = await searchResponse.json();
+            return resultsJson;
+            
         } catch (error) {
             console.log(error);
         }
