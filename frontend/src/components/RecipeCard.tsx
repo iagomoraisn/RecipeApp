@@ -14,3 +14,5 @@ const RecipeCard = ({recipe}: Props) => {
         </div>
     );
 };
+
+export default RecipeCard;
