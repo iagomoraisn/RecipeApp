@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RecipeSummary } from '../types';
+import * as RecipeAPI from '../api';
 
-const RecipeModal = () => {
+interface Props {
+    recipeId: string
+}
+
+const RecipeModal = ({ recipeId }: Props) => {
 
     const [recipeSummary, setRecipeSummary] = useState<RecipeSummary>();
+
+    useEffect(() => {
+        const fetchRecipeSummary = async () => {
+            try {
+                const summaryRecipe = await RecipeAPI.getRecipeSummary(recipeId);
+                setRecipeSummary(summaryRecipe)
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchRecipeSummary();
+    }, [recipeId]);
+
+    if(!recipeSummary) {
+        return <></>
+    }
 
     return (
         <>
@@ -16,7 +38,7 @@ const RecipeModal = () => {
                     &times;
                 </span>
             </div>
-            <p>RECIPE SUMMARY</p>
+            <p dangerouslySetInnerHTML={{ __html: recipeSummary.summary}}></p>
         </div>
         </div>
         </>
