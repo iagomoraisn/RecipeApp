@@ -3,10 +3,11 @@ import { RecipeSummary } from '../types';
 import * as RecipeAPI from '../api';
 
 interface Props {
-    recipeId: string
+    recipeId: string,
+    onClose: () => void;
 }
 
-const RecipeModal = ({ recipeId }: Props) => {
+const RecipeModal = ({ recipeId, onClose }: Props) => {
 
     const [recipeSummary, setRecipeSummary] = useState<RecipeSummary>();
 
@@ -33,8 +34,8 @@ const RecipeModal = ({ recipeId }: Props) => {
         <div className = "modal">
         <div className = "modal-content">
             <div className = "modal-header">
-                <h2>{recipeSummary?.id}</h2>
-                <span className= "close-btn">
+                <h2>{recipeSummary.title}</h2>
+                <span className= "close-btn" onClick={onClose}>
                     &times;
                 </span>
             </div>
