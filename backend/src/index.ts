@@ -39,6 +39,33 @@ app.post("/api/recipes/favourite", async (req, res) => {
     }
 })
 
+app.get("/api/recipes/favourite", async (req, res) => {
+    try {
+        const recipes = await prismaClient.favouriteRecipes.findMany();
+        const recipesIds = recipes.map((recipe) => recipe.recipeId.toString());
+        const favourites = await RecipeAPI.getFavouriteRecipesByIDs(recipesIds);
+        return res.json(favourites);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "algo está errado" });
+    }
+});
+
+app.delete("/api/recipes/favourite", async (req, res) => {
+    const recipeId = req.body.recipeId;
+    try {
+        await prismaClient.favouriteRecipes.deleteMany({
+            where:{
+                recipeId: recipeId
+            }
+        })
+        return res.status(204).send()
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "algo está errado" });
+    }
+})
+
 app.listen(5000, () => {
     console.log("server running on localhost:5000");
 });
