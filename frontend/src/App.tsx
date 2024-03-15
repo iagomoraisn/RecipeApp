@@ -19,7 +19,7 @@ const App = () => {
         const fetchFavouriteRecipes = async () => {
             try {
                 const favouriteRecipes = await api.getFavouriteRecipes();
-                setFavouriteRecipes(favouriteRecipes);
+                setFavouriteRecipes(favouriteRecipes.results);
             } catch (error) {
                 console.log(error);
             }
@@ -51,7 +51,17 @@ const App = () => {
 
     };
 
+    const addFavouriteRecipe = async (recipe: Recipe) => {
+        try {
+            await api.addFavouriteRecipe(recipe);
+            setFavouriteRecipes([...favouriteRecipes, recipe])
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
+    
     <div>
         <div className="tabs">
         <h1 onClick={() => setSelectedTab("search")}> Recipe Search</h1>
@@ -67,7 +77,8 @@ const App = () => {
         </form>
         
         {recipes.map((recipe) => (
-            <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)} />
+            <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
+             onFavouriteButtonClick={addFavouriteRecipe} />
             ))}
             <button 
             className="view-more-button"
@@ -77,7 +88,8 @@ const App = () => {
      
             {selectedTab === "favourites" && ( <div>
                 {favouriteRecipes.map((recipe) => (
-                    <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)} />
+                    <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
+                    onFavouriteButtonClick={() => undefined} />
                 ))}
                 </div>
                 )}
