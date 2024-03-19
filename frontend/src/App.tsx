@@ -77,10 +77,12 @@ const App = () => {
         </form>
         
         {recipes.map((recipe) => {
-            const isFavourite = favouriteRecipes.some((favRecipe) => )
+            const isFavourite = favouriteRecipes.some((favRecipe) => recipe.id === favRecipe.id )
              return (
             <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
-             onFavouriteButtonClick={addFavouriteRecipe} />
+             onFavouriteButtonClick={addFavouriteRecipe}
+             isFavourite={isFavourite}
+             />
              );
             })}
             <button 
@@ -92,7 +94,8 @@ const App = () => {
             {selectedTab === "favourites" && ( <div>
                 {favouriteRecipes.map((recipe) => (
                     <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
-                    onFavouriteButtonClick={() => undefined} />
+                    onFavouriteButtonClick={() => undefined}
+                    isFavourite={true} />
                 ))}
                 </div>
                 )}
