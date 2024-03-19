@@ -23,9 +23,9 @@ const App = () => {
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
         fetchFavouriteRecipes();
-        }, [])
+        }, []);
 
     const handleSearchSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ const App = () => {
         const nextPage = pageNumber.current + 1;
         try {
             const nextRecipes = await api.searchRecipes(searchTerm, nextPage);
-            setRecipes([...recipes, ...nextRecipes.results])
+            setRecipes([...recipes, ...nextRecipes.results]);
             pageNumber.current = nextPage;
         } catch (error) {
             console.log(error);
@@ -54,7 +54,7 @@ const App = () => {
     const addFavouriteRecipe = async (recipe: Recipe) => {
         try {
             await api.addFavouriteRecipe(recipe);
-            setFavouriteRecipes([...favouriteRecipes, recipe])
+            setFavouriteRecipes([...favouriteRecipes, recipe]);
         } catch (error) {
             console.log(error);
         }
@@ -76,10 +76,13 @@ const App = () => {
         <button type="submit">Submit</button>
         </form>
         
-        {recipes.map((recipe) => (
+        {recipes.map((recipe) => {
+            const isFavourite = favouriteRecipes.some((favRecipe) => )
+             return (
             <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
              onFavouriteButtonClick={addFavouriteRecipe} />
-            ))}
+             );
+            })}
             <button 
             className="view-more-button"
             onClick={handleViewMoreClick}
