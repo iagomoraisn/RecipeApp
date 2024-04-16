@@ -60,6 +60,16 @@ const App = () => {
         }
     };
 
+    const removeFavouriteRecipe = async (recipe: Recipe) => {
+        try {
+            await api.removeFavouriteRecipe(recipe);
+            const updatedRecipes = favouriteRecipes.filter((favRecipe)=> recipe.id !== favRecipe.id );
+        setFavouriteRecipes(updatedRecipes);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
     
     <div>
@@ -80,7 +90,7 @@ const App = () => {
             const isFavourite = favouriteRecipes.some((favRecipe) => recipe.id === favRecipe.id )
              return (
             <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
-             onFavouriteButtonClick={addFavouriteRecipe}
+             onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
              isFavourite={isFavourite}
              />
              );
@@ -94,7 +104,7 @@ const App = () => {
             {selectedTab === "favourites" && ( <div>
                 {favouriteRecipes.map((recipe) => (
                     <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
-                    onFavouriteButtonClick={() => undefined}
+                    onFavouriteButtonClick={removeFavouriteRecipe}
                     isFavourite={true} />
                 ))}
                 </div>
