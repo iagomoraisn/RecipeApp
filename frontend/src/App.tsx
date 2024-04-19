@@ -94,9 +94,11 @@ const App = () => {
             ></input>
         <button type="submit"><AiOutlineSearch size={40}/></button>
         </form>
-        
+
+
+        <div className="recipe-grid"></div>
         {recipes.map((recipe) => {
-            const isFavourite = favouriteRecipes.some((favRecipe) => recipe.id === favRecipe.id )
+            const isFavourite = favouriteRecipes.some((favRecipe) => recipe.id === favRecipe.id );
              return (
             <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
              onFavouriteButtonClick={isFavourite ? removeFavouriteRecipe : addFavouriteRecipe}
@@ -110,7 +112,7 @@ const App = () => {
             >View More</button>
         </>)}
      
-            {selectedTab === "favourites" && ( <div>
+            {selectedTab === "favourites" && ( <div className="recipe-grid">
                 {favouriteRecipes.map((recipe) => (
                     <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}
                     onFavouriteButtonClick={removeFavouriteRecipe}
