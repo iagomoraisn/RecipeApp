@@ -4,6 +4,7 @@ import * as api from './api';
 import { Recipe } from './types';
 import RecipeCard from './components/RecipeCard';
 import RecipeModal from './components/RecipeModal';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 type Tabs = "search" | "favourites";
 
@@ -78,8 +79,12 @@ const App = () => {
             <div className="title">My Recipe App</div>
         </div>
         <div className="tabs">
-        <h1 onClick={() => setSelectedTab("search")}> Recipe Search</h1>
-        <h1 onClick={() => setSelectedTab("favourites")}> Favourites </h1>
+        <h1 
+        className={selectedTab === "search" ? "tab-active" : ""}
+        onClick={() => setSelectedTab("search")}> Recipe Search</h1>
+        <h1 
+                className={selectedTab === "favourites" ? "tab-active" : ""}
+        onClick={() => setSelectedTab("favourites")}> Favourites </h1>
         </div>
         {selectedTab === "search" && (<>
             <form onSubmit={(event) => handleSearchSubmit(event)}>
@@ -87,7 +92,7 @@ const App = () => {
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
             ></input>
-        <button type="submit">Submit</button>
+        <button type="submit"><AiOutlineSearch size={40}/></button>
         </form>
         
         {recipes.map((recipe) => {

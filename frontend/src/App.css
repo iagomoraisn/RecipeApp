@@ -2,6 +2,40 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  padding-top: 5em;
+  padding-bottom: 5em;
+  height: 100vh;
+  background-color: white;
+
+}
+
+@media (min-width: 768px) {
+  body {
+    margin-left: 10em;
+    margin-right: 10em;
+  }
+
+}
+
+.tab-active {
+  border-bottom: 4px orange solid;
+  padding-bottom: 0.5em;
+}
+
+form {
+  display: flex;
+  background-color: white;
+  align-items: center;
+}
+
+input {
+  padding: 0.5em;
+  font-size: 2m;
+  flex: 1;
+  border: none;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
